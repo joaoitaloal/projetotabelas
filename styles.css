@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+body{
+    margin: 0;
+    background-color: rgb(21, 19, 26);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1{
+    margin: 0;
+}
+
+main{
+    min-height: 92vh;
+    text-align: center;
+    background-color: white;
+    width: 50vw;
+    margin: auto;
+    border-radius: 0 0 10px 10px;
+}
+
+
+label{
+    display: block;
+}
+
+#table{
+}
+
+input{
+    margin-bottom: 10px;
+}
+#simb{
+
+}
+#prop{
+
+}
+.ops{
+    width: 2.5vw;
+    margin: 5px;
+}
+
+table{
+    width: 30vw ;
+    margin: 10px auto 0 auto;
+    border-collapse: collapse;
+}
+th, td{
+    font-weight: bolder;
+    text-align: center;
+    border: 1px solid black;
+}
+td{
+    font-variant: small-caps;
+}
+.verdadeiro{
+    background-color: green;
+}
+.falso{
+    background-color: red;
+}
+.verdadeiroprop{
+    background-color: rgb(80, 212, 80);
+}
+.falsoprop{
+    background-color: rgb(228, 65, 65);
+}
+
+footer{
+    color: white;
+    text-align: center;
+}
+
+footer > p{
+    display: inline-block;
+    padding-right: 20px;
+}
+footer > p > img{
+    position: relative;
+    top: 3px;
+}
+footer > p > a{
+    color: inherit;
+}
+footer > p > a:hover{
+    color: rgb(0, 89, 255);
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tabelas verdade</title>
+</head>
+<body>
+    <!-- TESTAR EM OUTROS NAVEGADORES!! -->
+    <!-- Funcionalidades pra add:
+            Funcionar pelo teclado
+            Ver se posso melhorar a acessibilidade
+            Deixar bonito
+            Umas melhorias de vida tipo zebrar as cores da tabela
+            Ir testando porque deve ter umas 15 formas de travar a página
+    -->
+    <main>
+        <h1>
+            Tabelas verdade
+        </h1>
+        <div>
+            <label for="simb">Insira até 6 simbolos</label>
+            <input id="simb" type="text" onfocus="entrada()" onblur="saida()"> <input type="button" value="inserir" onclick="inserirSimbolo()">
+
+            <label for="prop">Insira uma proposição lógica</label><input id="prop" type="text" disabled>
+            <input type="button" value="inserir" onclick="inserirProposicao()">
+            <input type="button" value="criar" onclick="criarTabela()"> 
+            
+            <div id="teclado">
+                <div id="adicionador"></div>
+                <input class="ops" type="button" value="&#8743;" onclick="adicionaraProp(value)">
+                <input class="ops" type="button" value="&#8744;" onclick="adicionaraProp(value)">
+                <input class="ops" type="button" value="&#172;" onclick="adicionaraProp(value)">
+                <input class="ops" type="button" value="&#8891;" onclick="adicionaraProp(value)">
+                <input class="ops" type="button" value="&#8594;" onclick="adicionaraProp(value)">
+                <input class="ops" type="button" value="&#8660;" onclick="adicionaraProp(value)">
+                <input class="ops" type="button" value="(" onclick="adicionaraProp(value)">
+                <input class="ops" type="button" value=")" onclick="adicionaraProp(value)">
+                <input type="button" value="apagar" onclick="apagar()">
+                <input type="button" value="limpar" onclick="limpar()">
+            </div>
+        </div>
+        <div id="table">
+            <table>
+                <thead>
+                    <tr id="cabecalho">
+                    </tr>
+                </thead>
+                <tbody id="corpo">
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>
+            Feito por <a href="https://github.com/joaoitaloal" target="_blank">Italo</a> <img style="height: 20px;" src="imagens/github-icon.png" alt="logo do github">
+        </p>
+        <p>
+            <a href="sobre.html" target="_self">Sobre</a>
+        </p>
+    </footer>
+    <script src="scripts/insercaodados.js"></script>
+    <script src="scripts/processamento.js"></script>
+    <script src="scripts/funcionalidades.js"></script>
+</body>
+</html>
