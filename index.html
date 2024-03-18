@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" spellcheck="false">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <title>Tabelas verdade</title>
+    <title>Calculadora lógica</title>
 </head>
 <body>
     <!-- TESTAR EM OUTROS NAVEGADORES!! -->
     <!-- Funcionalidades pra add:
-            Funcionar pelo teclado
+            Funcionalidade total pelo teclado
             Ver se posso melhorar a acessibilidade
-            Deixar bonito
             Umas melhorias de vida tipo zebrar as cores da tabela
             Ir testando porque deve ter umas 15 formas de travar a página
+            Terminar o sistema de listrar (ou apagar, não é muito util e é feio)
+            O sistema de apagar as proposições quando um simbolo é apagado não tá funcionando direito e não consegui consertar
+            Criar o sobre
     -->
     <main>
         <h1>
-            Tabelas verdade
+            Calculadora lógica
         </h1>
         <div>
             <label for="simb">Insira até 6 simbolos</label>
-            <input id="simb" type="text" onfocus="entrada()" onblur="saida()"> <input type="button" value="inserir" onclick="inserirSimbolo()">
+            <input id="simb" type="text" onfocus="entrada()" onblur="saida()"> <input type="button" value="inserir" onclick="inserirSimbolo()"> 
 
-            <label for="prop">Insira uma proposição lógica</label><input id="prop" type="text" disabled>
-            <input type="button" value="inserir" onclick="inserirProposicao()">
-            <input type="button" value="criar" onclick="criarTabela()"> 
-            
+            <label for="prop">Insira uma proposição lógica</label>
             <div id="teclado">
+                <input id="prop" type="text" disabled>
+                <input type="button" value="inserir" onclick="inserirProposicao()">
+                <input type="button" value="criar" onclick="criarTabela()"> 
+                Listrar tabela<input type="checkbox" name="striped" id="striped" onchange="listrar()">
+            
                 <div id="adicionador"></div>
                 <input class="ops" type="button" value="&#8743;" onclick="adicionaraProp(value)">
                 <input class="ops" type="button" value="&#8744;" onclick="adicionaraProp(value)">
@@ -38,9 +42,13 @@
                 <input class="ops" type="button" value="&#8660;" onclick="adicionaraProp(value)">
                 <input class="ops" type="button" value="(" onclick="adicionaraProp(value)">
                 <input class="ops" type="button" value=")" onclick="adicionaraProp(value)">
-                <input type="button" value="apagar" onclick="apagar()">
-                <input type="button" value="limpar" onclick="limpar()">
+                <input class="apagar" type="button" value="apagar" onclick="apagar()">
+                <input class="apagar" type="button" value="limpar" onclick="limpar()">
             </div>
+        </div>
+        <div id="inseridos">
+            <div id="simbinseridos"><p>Simbolos inseridos:</p></div>
+            <div id="propinseridos"><p>Proposições inseridas:</p></div>
         </div>
         <div id="table">
             <table>
@@ -55,12 +63,8 @@
         </div>
     </main>
     <footer>
-        <p>
-            Feito por <a href="https://github.com/joaoitaloal" target="_blank">Italo</a> <img style="height: 20px;" src="imagens/github-icon.png" alt="logo do github">
-        </p>
-        <p>
-            <a href="sobre.html" target="_self">Sobre</a>
-        </p>
+        <p>Feito por <a href="https://github.com/joaoitaloal" target="_blank">Italo</a> <img style="height: 20px;" src="imagens/github-icon.png" alt="logo do github"></p>
+        <p><a href="sobre.html" target="_self">Sobre</a></p>
     </footer>
     <script src="scripts/insercaodados.js"></script>
     <script src="scripts/processamento.js"></script>

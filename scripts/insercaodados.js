@@ -19,7 +19,8 @@ function inserirSimbolo(){
                 window.alert("simbolo já inserido");
             }else if(simbols.length < 6){
                 simbols.push(simbolo.value);
-                document.getElementById("adicionador").innerHTML+= `<input class="ops" type="button" value="${simbolo.value}" onclick="adicionaraProp(value)">`;
+                document.getElementById("adicionador").innerHTML+= `<input id="bt${simbolo.value}" class="ops" type="button" value="${simbolo.value}" onclick="adicionaraProp(value)">`;
+                document.getElementById("simbinseridos").innerHTML+= `<div id="divs${simbolo.value}"><p class="btsimb">${simbolo.value}</p><input id="${simbolo.value}" type="button" value="apagar" onclick="apagarSimb(id)"></div>`;
             }else{
                 window.alert("no máximo seis simbolos!");
             }
@@ -29,15 +30,40 @@ function inserirSimbolo(){
     }
     simbolo.value = "";
 }
+function apagarSimb(id){
+    //apaga o simbolo do array, do teclado e das proposições inseridas se ele tiver lá
+    let apagar = simbols.indexOf(id);
+    let prop = document.getElementById('prop');
+    props.forEach((element) =>{
+        if(element.indexOf(id) != -1){
+            props.slice(props.indexOf(element));
+            //nao sei se vai funcionar
+            apagarProp(element);
+        }
+    })
+    simbols.splice(apagar, 1)
+    document.getElementById(`bt${id}`).remove();
+    document.getElementById(`divs${id}`).remove();
+    if(prop.value.indexOf(id) != -1){
+        prop.value = prop.value.slice(0, prop.value.indexOf(id))+prop.value.slice(prop.value.indexOf(id)+1)
+    }
+    console.log(props);
+}
 
 function inserirProposicao(){
     var prop = document.getElementById('prop');
     if(prop.value != ""){
         props.push(prop.value);
+        document.getElementById("propinseridos").innerHTML+= `<div id="divp${prop.value}"><p class="btprop">${prop.value}</p><input id="${prop.value}" type="button" value="apagar" onclick="apagarProp(id)"></div>`;
     }else{
         window.alert("insira uma proposição lógica!")
     }
     prop.value = "";
+}
+function apagarProp(id){
+    let apagar = props.indexOf(id);
+    props.splice(apagar,1);
+    document.getElementById(`divp${id}`).remove();
 }
 
 function adicionaraProp(valor){
@@ -72,6 +98,7 @@ function criarTabela(){
     for(let i = 0; i < yMax; i++){
         let tr = document.createElement("tr");
         tr.setAttribute("id",`row${i}`);
+        tr.setAttribute("class", "row");
         corpo.appendChild(tr);
     }
     arrayTabela();

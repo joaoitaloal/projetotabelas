@@ -19,3 +19,12 @@ function limpar(){
     let limpar = document.getElementById("prop");
     limpar.value = "";
 }
+
+function listrar(){
+    let tr = document.getElementsByClassName("row");
+    if(tr.length != 0){
+        tr.array.forEach(element => {
+            element.style.backgroundcolor = "black";
+        });
+    }
+}
