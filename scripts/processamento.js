@@ -41,7 +41,7 @@ function lerProp(prop){
     //TESTAR BEM ISSO: como é um while se o usuário conseguir chegar numa proposição que nunca retorne v ou f vai travar a página
     while(prop != "v" && prop != "f"){
         if(prop.includes("(")){
-            if(!prop.includes(")")){window.alert("feche os parênteses!"); break;}
+            if(!prop.includes(")")){window.alert("feche os parênteses!"); return "";}
             var iniparen = prop.indexOf("(")+1;
             var fimparen = prop.lastIndexOf(")")-1;
             

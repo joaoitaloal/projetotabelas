@@ -8,15 +8,9 @@
     <title>Calculadora lógica</title>
 </head>
 <body>
-    <!-- TESTAR EM OUTROS NAVEGADORES!! -->
-    <!-- Funcionalidades pra add:
-            Funcionalidade total pelo teclado
-            Ver se posso melhorar a acessibilidade
-            Umas melhorias de vida tipo zebrar as cores da tabela
-            Ir testando porque deve ter umas 15 formas de travar a página
-            Terminar o sistema de listrar (ou apagar, não é muito util e é feio)
-            O sistema de apagar as proposições quando um simbolo é apagado não tá funcionando direito e não consegui consertar
-            Criar o sobre
+    <script src="scripts/processamento.js"></script>
+    <!-- TESTAR EM OUTROS NAVEGADORES!!
+            A remoção de simbolos não tá funcionando no edge
     -->
     <main>
         <h1>
@@ -24,26 +18,14 @@
         </h1>
         <div>
             <label for="simb">Insira até 6 simbolos</label>
-            <input id="simb" type="text" onfocus="entrada()" onblur="saida()"> <input type="button" value="inserir" onclick="inserirSimbolo()"> 
+            <input id="simb" type="text" onfocus="entrada()" onblur="saida()" autofocus> <input type="button" value="inserir" onclick="inserirSimbolo()"> 
 
             <label for="prop">Insira uma proposição lógica</label>
             <div id="teclado">
-                <input id="prop" type="text" disabled>
-                <input type="button" value="inserir" onclick="inserirProposicao()">
-                <input type="button" value="criar" onclick="criarTabela()"> 
-                Listrar tabela<input type="checkbox" name="striped" id="striped" onchange="listrar()">
+                <input id="prop" type="text" disabled><input class="inserir" type="button" value="inserir" onclick="inserirProposicao()"><input class="inserir" type="button" value="criar" onclick="criarTabela()"> 
             
                 <div id="adicionador"></div>
-                <input class="ops" type="button" value="&#8743;" onclick="adicionaraProp(value)">
-                <input class="ops" type="button" value="&#8744;" onclick="adicionaraProp(value)">
-                <input class="ops" type="button" value="&#172;" onclick="adicionaraProp(value)">
-                <input class="ops" type="button" value="&#8891;" onclick="adicionaraProp(value)">
-                <input class="ops" type="button" value="&#8594;" onclick="adicionaraProp(value)">
-                <input class="ops" type="button" value="&#8660;" onclick="adicionaraProp(value)">
-                <input class="ops" type="button" value="(" onclick="adicionaraProp(value)">
-                <input class="ops" type="button" value=")" onclick="adicionaraProp(value)">
-                <input class="apagar" type="button" value="apagar" onclick="apagar()">
-                <input class="apagar" type="button" value="limpar" onclick="limpar()">
+                <input class="ops" type="button" value="&#8743;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8744;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#172;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8891;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8594;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8660;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="(" onclick="adicionaraProp(value)"><input class="ops" type="button" value=")" onclick="adicionaraProp(value)"><input class="apagar" type="button" value="apagar" onclick="apagar()"><input class="apagar" type="button" value="limpar" onclick="limpar()">
             </div>
         </div>
         <div id="inseridos">
@@ -67,7 +49,6 @@
         <p><a href="sobre.html" target="_self">Sobre</a></p>
     </footer>
     <script src="scripts/insercaodados.js"></script>
-    <script src="scripts/processamento.js"></script>
     <script src="scripts/funcionalidades.js"></script>
 </body>
 </html>

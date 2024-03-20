@@ -36,7 +36,7 @@ function apagarSimb(id){
     let prop = document.getElementById('prop');
     props.forEach((element) =>{
         if(element.indexOf(id) != -1){
-            props.slice(props.indexOf(element));
+            props = props.slice(props.indexOf(element));
             //nao sei se vai funcionar
             apagarProp(element);
         }
@@ -47,7 +47,6 @@ function apagarSimb(id){
     if(prop.value.indexOf(id) != -1){
         prop.value = prop.value.slice(0, prop.value.indexOf(id))+prop.value.slice(prop.value.indexOf(id)+1)
     }
-    console.log(props);
 }
 
 function inserirProposicao(){
@@ -62,6 +61,7 @@ function inserirProposicao(){
 }
 function apagarProp(id){
     let apagar = props.indexOf(id);
+    console.log(id);
     props.splice(apagar,1);
     document.getElementById(`divp${id}`).remove();
 }
