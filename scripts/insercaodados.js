@@ -37,7 +37,6 @@ function apagarSimb(id){
     props.forEach((element) =>{
         if(element.indexOf(id) != -1){
             props = props.slice(props.indexOf(element));
-            //nao sei se vai funcionar
             apagarProp(element);
         }
     })
@@ -53,6 +52,7 @@ function inserirProposicao(){
     var prop = document.getElementById('prop');
     if(prop.value != ""){
         props.push(prop.value);
+        //Isso aqui poderia(seria melhor de entender) ser substituido por alguns .createElement, setAttribute etc
         document.getElementById("propinseridos").innerHTML+= `<div id="divp${prop.value}"><p class="btprop">${prop.value}</p><input id="${prop.value}" type="button" value="apagar" onclick="apagarProp(id)"></div>`;
     }else{
         window.alert("insira uma proposição lógica!")
@@ -61,7 +61,6 @@ function inserirProposicao(){
 }
 function apagarProp(id){
     let apagar = props.indexOf(id);
-    console.log(id);
     props.splice(apagar,1);
     document.getElementById(`divp${id}`).remove();
 }
@@ -72,6 +71,7 @@ function adicionaraProp(valor){
 }
 
 function criarTabela(){
+    //Resetar as variáveis
     simblen = simbols.length;
     proplen = props.length;
     xMax = simblen+proplen;
@@ -79,7 +79,7 @@ function criarTabela(){
     cabecalho.innerHTML = "";
     corpo.innerHTML = "";
     
-    //inserir os simbolos no thead
+    //inserir os simbolos em thead
     for(let i = 0; i < simblen; i++){
         let th = document.createElement("th");
         th.setAttribute("id",`sim${i}`);
@@ -87,14 +87,14 @@ function criarTabela(){
         th.innerText = simbols[i];
         cabecalho.appendChild(th);
     }
-    //inserir as props no thead
+    //inserir as props em thead
     for(let i = 0; i < proplen; i++){
         let th = document.createElement("th");
         th.setAttribute("id", `prop${i}`);
         th.innerText = props[i];
         cabecalho.appendChild(th);
     }
-    //criar cada linha da tabela
+    //criar e indexar cada linha da tabela
     for(let i = 0; i < yMax; i++){
         let tr = document.createElement("tr");
         tr.setAttribute("id",`row${i}`);
@@ -103,17 +103,18 @@ function criarTabela(){
     }
     arrayTabela();
     popularTabelasim();
+
+    //Variável que tá sendo usada pra indicar erros manualmente
     var error = false;
 
-    //substituir, processar e escrever a prop na tabela
+    //substituir e processar a proposição e escrever na célula correspondente da tabela
     for(let x = 0; x < proplen; x++){
         if(error) break;
         for(let y = 0; y < yMax; y++){
             if(error) break;
             let prop;
 
-            //isso aqui é pra cada quantidade possivel de simbolos que podem ser inseridos
-            //tá feio né mas não pensei em outra forma de fazer
+            //Chamar a função dependendo da quantidade de simbolos inseridos
             switch(simblen){
                 case(0): 
                     window.alert("nenhum simbolo inserido")
@@ -147,22 +148,20 @@ function criarTabela(){
 //Criar e indexar cada td da tabela
 function arrayTabela(){
     //rodar todas as colunas
-    for(let i = 0; i < xMax; i++){
+    for(let x = 0; x < xMax; x++){
         //rodar todas as linhas da coluna
-        for(let i2 = 0; i2 < yMax; i2++){
-            let row = document.getElementById(`row${i2}`);
-            row.innerHTML+= `<td id="x${i}y${i2}"></td>`
+        for(let y = 0; y < yMax; y++){
+            let row = document.getElementById(`row${y}`);
+            row.innerHTML+= `<td id="x${x}y${y}"></td>`
         }
     }
 }
 
 //colocar todas as possibilidades de valores verdade para os simbolos na tabela
 function popularTabelasim(){
-    let num = 0;
-
     //coluna
     for(let x = 0; x < xMax - proplen; x++){
-        num = 0;
+        let primeiraslinhas = 0;
         //linha
         for(let y = 0; y < yMax; y++){
             let states = "f";
@@ -173,13 +172,13 @@ function popularTabelasim(){
             }else if (y >= yMax/(2**x)){
                 //se não, repetir os primeiros estados até o fim
                 if(x != 0){
-                states = document.getElementById(`x${x}y${num}`).innerText;
-                num++;
+                states = document.getElementById(`x${x}y${primeiraslinhas}`).innerText;
+                primeiraslinhas++;
                 }
             }
             let td = document.getElementById(`x${x}y${y}`);
-            if(states == "v") td.setAttribute("class","verdadeiro");
-            else td.setAttribute("class","falso");
+            if(states == "v") td.setAttribute("class", "verdadeiro");
+            else td.setAttribute("class", "falso");
             td.innerText = states;
         }
     }
