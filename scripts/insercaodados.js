@@ -41,7 +41,7 @@ function apagarSimb(id){
         }
     })
     simbols.splice(apagar, 1)
-    document.getElementById(`bt${id}`).remove();
+    document.getElementById(`adicionador`).getElementsByClassName(`ops`)[apagar].remove();
     document.getElementById(`divs${id}`).remove();
     if(prop.value.indexOf(id) != -1){
         prop.value = prop.value.slice(0, prop.value.indexOf(id))+prop.value.slice(prop.value.indexOf(id)+1)
