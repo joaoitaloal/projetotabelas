@@ -44,7 +44,7 @@ h1{
     }
     .ops{
         font-variant: normal;
-        font-size: 1.5em;
+        font-size: 1rem;
         text-align: center;
         width: 6vw;
         height: 6vw;
@@ -95,10 +95,10 @@ h1{
     td{
         font-variant: small-caps;
     }
-    .verdadeiro{
+    .v{
         background-color: green;
     }
-    .falso{
+    .f{
         background-color: red;
     }
     .verdadeiroprop{
@@ -228,10 +228,10 @@ h1{
     td{
         font-variant: small-caps;
     }
-    .verdadeiro{
+    .v{
         background-color: green;
     }
-    .falso{
+    .f{
         background-color: red;
     }
     .verdadeiroprop{

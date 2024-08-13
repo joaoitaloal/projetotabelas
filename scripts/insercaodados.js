@@ -9,7 +9,7 @@ var yMax;
 
 function inserirSimbolo(){
     let simbolo = document.getElementById('simb');
-    if(simbolo.value.search(/[∧∨¬⊻→⇔()vf ]/) != -1){
+    if(simbolo.value.search(/[∧∨¬⊻→⇔()., ]/) != -1){
         window.alert("simbolo inválido");
     }else if(simbolo.value.length > 1){
         window.alert("apenas um caractere por simbolo")
@@ -17,7 +17,7 @@ function inserirSimbolo(){
         if(simbolo.value != ""){
             if(simbols.includes(simbolo.value)){
                 window.alert("simbolo já inserido");
-            }else if(simbols.length < 6){
+            }else if(simbols.length < 10){
                 simbols.push(simbolo.value);
                 document.getElementById("adicionador").innerHTML+= `<input id="bt${simbolo.value}" class="ops" type="button" value="${simbolo.value}" onclick="adicionaraProp(value)">`;
                 document.getElementById("simbinseridos").innerHTML+= `<div id="divs${simbolo.value}"><p class="btsimb">${simbolo.value}</p><input id="${simbolo.value}" type="button" value="apagar" onclick="apagarSimb(id)"></div>`;
@@ -161,24 +161,19 @@ function arrayTabela(){
 function popularTabelasim(){
     //coluna
     for(let x = 0; x < xMax - proplen; x++){
-        let primeiraslinhas = 0;
         //linha
         for(let y = 0; y < yMax; y++){
             let states = "f";
+            let calcVerdade = (y+1)%(2**(x+1));
 
-            if(y < yMax/((2**x)*2)){
-                //se a linha atual for metade do total de linhas multiplicado pela coluna, estado é V
+            //Calculo pra criar os valores verdades dinamicamente
+            if(calcVerdade != 0 && calcVerdade <= (2**(x+1))/2){
                 states = "v";
-            }else if (y >= yMax/(2**x)){
-                //se não, repetir os primeiros estados até o fim
-                if(x != 0){
-                states = document.getElementById(`x${x}y${primeiraslinhas}`).innerText;
-                primeiraslinhas++;
-                }
             }
+
             let td = document.getElementById(`x${x}y${y}`);
-            if(states == "v") td.setAttribute("class", "verdadeiro");
-            else td.setAttribute("class", "falso");
+            if(states == "v") td.setAttribute("class", "v");
+            else td.setAttribute("class", "f");
             td.innerText = states;
         }
     }

@@ -14,12 +14,12 @@
             Calculadora lógica
         </h1>
         <div>
-            <label for="simb">Insira até 6 simbolos</label>
+            <label for="simb">Insira até 10 simbolos</label>
             <input id="simb" type="text" onfocus="entrada()" onblur="saida()" autofocus> <input type="button" value="inserir" onclick="inserirSimbolo()"> 
-
+            <p>Por favor utilize os parenteses em proposições grandes ou complexas</p>
             <label for="prop">Insira uma proposição lógica</label>
             <div id="teclado">
-                <input id="prop" type="text" disabled><input class="inserir" type="button" value="inserir" onclick="inserirProposicao()"><input class="inserir" type="button" value="criar" onclick="criarTabela()"> 
+                <input id="prop" type="text"><input class="inserir" type="button" value="inserir" onclick="inserirProposicao()"><input class="inserir" type="button" value="criar" onclick="criarTabela()"> 
             
                 <div id="adicionador"></div>
                 <input class="ops" type="button" value="&#8743;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8744;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#172;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8891;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8594;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="&#8660;" onclick="adicionaraProp(value)"><input class="ops" type="button" value="(" onclick="adicionaraProp(value)"><input class="ops" type="button" value=")" onclick="adicionaraProp(value)"><input class="apagar" type="button" value="apagar" onclick="apagar()"><input class="apagar" type="button" value="limpar" onclick="limpar()">

@@ -1,9 +1,10 @@
-var selecionado = false;
-var bttPosX = 0;
-var bttPosY = 0;
-var tec = document.getElementById("teclado");
-var tecinput = document.getElementById("prop");
-var btts = document.getElementsByClassName("inserir");
+let selecionado = false;
+let bttPosX = 0;
+let bttPosY = 0;
+let tec = document.getElementById("teclado");
+let tecinput = document.getElementById("prop");
+let btts = document.getElementsByClassName("inserir");
+let textFocus = true;
 
 const enterHandler = (e) =>{
     //Aceitar o enter como forma de inserir simbolo se estiver com foco
@@ -14,6 +15,7 @@ const enterHandler = (e) =>{
         //Perder o foco do input
         let input = document.getElementById("simb");
         input.blur();
+        textFocus = false;
     }
 }
 
@@ -47,6 +49,7 @@ const seletor = (e) =>{
             deselecionar();
             let input = document.getElementById("simb");
             input.focus();
+            textFocus = true;
         }
     }else if(e.code === "ArrowDown"){
         btts[bttPosX][bttPosY].removeAttribute("id");
@@ -69,7 +72,7 @@ const seletor = (e) =>{
             limpar();
         }
     }
-    if(e.code === "Backspace"){
+    if(e.code === "Backspace" && !textFocus){
         apagar();
     }
 }
@@ -115,5 +118,6 @@ function deselecionar(){
         btts[bttPosX][bttPosY].removeAttribute("id");
         document.removeEventListener("keydown", seletor);
         selecionado = false;
+        textFocus = false;
     }
 }
