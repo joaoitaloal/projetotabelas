@@ -4,42 +4,42 @@ var maxEspera = 10000000;
 function substituir(prop,simb1,simb2 = "",simb3 = "",simb4 = "",simb5 = "",simb6 = ""){
     var val1 = document.getElementById(simb1).innerText;
     simb1 = document.getElementById("sim0").innerText;
-    prop = prop.replaceAll(simb1,val1);
+    prop = prop.replace(new RegExp(simb1, "g"),val1);
     //Aqui ele tá vendo quantos simbolos existem e substituindo eles caso existam
     //Apesar de não ser o código mais bonito ele é simples então não tem perigo de dar qualquer bug
     if(simb2 != ""){
         var val2 = document.getElementById(simb2).innerText;
         simb2 = document.getElementById("sim1").innerText;
-        prop = prop.replaceAll(simb2,val2);
+        prop = prop.replace(new RegExp(simb2, "g"),val2);
         if(simb3 != ""){
             var val3 = document.getElementById(simb3).innerText;
             simb3 = document.getElementById("sim2").innerText;
-            prop = prop.replaceAll(simb3,val3);
+            prop = prop.replace(new RegExp(simb3, "g"),val3);
             if(simb4 != ""){
                 var val4 = document.getElementById(simb4).innerText;
                 simb4 = document.getElementById("sim3").innerText;
-                prop = prop.replaceAll(simb4,val4);
+                prop = prop.replace(new RegExp(simb4, "g"),val4);
                 if(simb5 != ""){
                     var val5 = document.getElementById(simb5).innerText;
                     simb5 = document.getElementById("sim4").innerText;
-                    prop = prop.replaceAll(simb5,val5);
+                    prop = prop.replace(new RegExp(simb5, "g"),val5);
                     if(simb6 != ""){
                         var val6 = document.getElementById(simb6).innerText;
                         simb6 = document.getElementById("sim5").innerText;
-                        prop = prop.replaceAll(simb6,val6);
+                        prop = prop.replace(new RegExp(simb6, "g"),val6);
                     } 
                 }
             }
         }
     }
-    return prop.replaceAll("v",".").replaceAll("f",",");
+    return prop.replace(/v|\⊤/g,"1").replace(/f|\⊥/g,"0");
 }
 
-//função que recebe uma proposição(com v ou f no lugar dos simbolos) e retorna um valor final "." ou ","
+//função que recebe uma proposição(com v ou f no lugar dos simbolos) e retorna um valor final "1" ou "0"
 function lerProp(prop){
     var controle = 0;
     //Loopar o algoritmo até a proposição retornar v ou f
-    while(prop != "." && prop != ","){
+    while(prop != "1" && prop != "0"){
         //Se o loop durar exageradamente muito, provavelmente ele não vai terminar então retorna um erro
         controle +=1;
         if(controle > maxEspera){
@@ -61,21 +61,21 @@ function lerProp(prop){
         }else if(prop.includes("¬")){
             indexne = prop.indexOf("¬");
             //Pegar o valor do primeiro v e do primeiro f e ver qual vem primeiro para ser invertido
-            indexv = prop.indexOf(".");
-            indexf = prop.indexOf(",");
+            indexv = prop.indexOf("1");
+            indexf = prop.indexOf("0");
 
             if(indexf != -1 && indexv != -1){
                 if(indexf > indexv){
                     let newprop1 = prop.slice(0,indexv);
                     let newprop2 = prop.slice(indexv+1, prop.length);
-                    prop = newprop1+","+newprop2;
+                    prop = newprop1+"0"+newprop2;
                     newprop1 = prop.slice(0,indexne);
                     newprop2 = prop.slice(indexne+1, prop.length);
                     prop = newprop1+newprop2;
                 }else{
                     let newprop1 = prop.slice(0,indexf);
                     let newprop2 = prop.slice(indexf+1, prop.length);
-                    prop = newprop1+"."+newprop2;
+                    prop = newprop1+"1"+newprop2;
                     newprop1 = prop.slice(0,indexne);
                     newprop2 = prop.slice(indexne+1, prop.length);
                     prop = newprop1+newprop2;
@@ -83,14 +83,14 @@ function lerProp(prop){
             }else if(indexf != -1){
                 let newprop1 = prop.slice(0,indexf);
                 let newprop2 = prop.slice(indexf+1, prop.length);
-                prop = newprop1+"."+newprop2;
+                prop = newprop1+"1"+newprop2;
                 newprop1 = prop.slice(0,indexne);
                 newprop2 = prop.slice(indexne+1, prop.length);
                 prop = newprop1+newprop2;
             }else{
                 let newprop1 = prop.slice(0,indexv);
                 let newprop2 = prop.slice(indexv+1, prop.length);
-                prop = newprop1+","+newprop2;
+                prop = newprop1+"0"+newprop2;
                 newprop1 = prop.slice(0,indexne);
                 newprop2 = prop.slice(indexne+1, prop.length);
                 prop = newprop1+newprop2;
@@ -141,7 +141,7 @@ function lerProp(prop){
             let newprop1 = prop.slice(0,indexc-1);
             let newprop2 = prop.slice(indexc+2, prop.length);
             prop = newprop1+tempval+newprop2;
-        }else if(prop != "." && prop != ","){
+        }else if(prop != "1" && prop != "0"){
             //Se todos os operadores forem calculados e o resultado não for v nem f retornar um erro para evitar que loope pra sempre
             window.alert("Não foi possível calcular, provavelmente uma fórmula mal formulada");
             return "";
@@ -153,40 +153,40 @@ function lerProp(prop){
 //Substituir o texto do <td> de id fornecido pelo valor verdade fornecido
 function escrever(state, id){
     td = document.getElementById(id);
-    if(state == ".") td.setAttribute("class", "verdadeiroprop");
+    if(state == "1") td.setAttribute("class", "verdadeiroprop");
     else td.setAttribute("class", "falsoprop");
-    td.innerText = state == "." ? "v" : "f";
+    td.innerText = state == "1" ? "v" : "f";
 }
 
 //objeto com todas as operações utilizadas
 const op = {
     conjuncao(x,y){
-        if(x == "." && y =="."){
-            return ".";
+        if(x == "1" && y =="1"){
+            return "1";
         }
-        return ",";
+        return "0";
     },
     disjuncao(x,y){
-        if(x == "." || y =="."){
-            return ".";
+        if(x == "1" || y =="1"){
+            return "1";
         }
-        return ",";
+        return "0";
     },
     negacao(x){
-        if(x == "."){
-            return ",";
+        if(x == "1"){
+            return "0";
         }
-        return "."
+        return "1"
     },
     disjuncaoex(x,y){
         return op.disjuncao(op.conjuncao(op.negacao(x),y),op.conjuncao(x,op.negacao(y)));
     },
     implicacao(x,y){
-        if(x == "." && y != ".") return ",";
-        return ".";
+        if(x == "1" && y != "1") return "0";
+        return "1";
     },
     biimplicacao(x,y){
-        if(x == y) return ".";
-        return ",";
+        if(x == y) return "1";
+        return "0";
     }
 }

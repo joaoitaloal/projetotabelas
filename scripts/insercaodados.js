@@ -9,7 +9,7 @@ var yMax;
 
 function inserirSimbolo(){
     let simbolo = document.getElementById('simb');
-    if(simbolo.value.search(/[∧∨¬⊻→⇔()., ]/) != -1){
+    if(simbolo.value.search(/[∧∨¬⊻→⇔().,TF⊤⊥~⊕= ]/) != -1){
         window.alert("simbolo inválido");
     }else if(simbolo.value.length > 1){
         window.alert("apenas um caractere por simbolo")
@@ -22,7 +22,7 @@ function inserirSimbolo(){
                 document.getElementById("adicionador").innerHTML+= `<input id="bt${simbolo.value}" class="ops" type="button" value="${simbolo.value}" onclick="adicionaraProp(value)">`;
                 document.getElementById("simbinseridos").innerHTML+= `<div id="divs${simbolo.value}"><p class="btsimb">${simbolo.value}</p><input id="${simbolo.value}" type="button" value="apagar" onclick="apagarSimb(id)"></div>`;
             }else{
-                window.alert("no máximo seis simbolos!");
+                window.alert("no máximo 10 simbolos!");
             }
         }else{
             window.alert("insira um simbolo!");
@@ -49,15 +49,17 @@ function apagarSimb(id){
 }
 
 function inserirProposicao(){
-    var prop = document.getElementById('prop');
-    if(prop.value != ""){
-        props.push(prop.value);
+    var propInput = document.getElementById('prop');
+    let prop = propInput.value;
+    if(prop != ""){
+        prop = substituirSimbolosProp(prop);
+        props.push(prop);
         //Isso aqui poderia(seria melhor de entender) ser substituido por alguns .createElement, setAttribute etc
-        document.getElementById("propinseridos").innerHTML+= `<div id="divp${prop.value}"><p class="btprop">${prop.value}</p><input id="${prop.value}" type="button" value="apagar" onclick="apagarProp(id)"></div>`;
+        document.getElementById("propinseridos").innerHTML+= `<div id="divp${prop}"><p class="btprop">${prop}</p><input id="${prop}" type="button" value="apagar" onclick="apagarProp(id)"></div>`;
     }else{
-        window.alert("insira uma proposição lógica!")
+        window.alert("insira uma proposição!");
     }
-    prop.value = "";
+    propInput.value = "";
 }
 function apagarProp(id){
     let apagar = props.indexOf(id);
@@ -177,4 +179,20 @@ function popularTabelasim(){
             td.innerText = states;
         }
     }
+}
+
+//(or, +, ∨), (and, ., ∧), (not, ~, ¬), (xor, ⊕, ⊻), (imp, =>, →), (impinv, <=, ←),(xnor, =, ⇔), (Tautologia, T, ⊤), (Absurdo, F, ⊥)
+function substituirSimbolosProp(prop){
+    prop = prop.replace(/or|\./g, "∨")
+    .replace(/and|\./gi, "∧")
+    .replace(/not|\~/g, "¬")
+    .replace(/xor|\⊕/g, "⊻")
+    .replace(/imp|\=>/g, "→")
+    .replace(/impinv|\<=/g, "←")
+    .replace(/xnor|\=/g, "⇔")
+    .replace(/tautologia|\T/g, "⊤")
+    .replace(/absurdo|\F/g, "⊥")
+    .replace(/ /g, "");
+    
+    return prop
 }
