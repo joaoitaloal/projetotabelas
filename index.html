@@ -14,10 +14,10 @@
             Calculadora lógica
         </h1>
         <div>
-            <label for="simb">Insira até 10 simbolos</label>
+            <label for="simb" style="font-weight: bold;">Insira até 10 simbolos</label>
             <input id="simb" type="text" onfocus="entrada()" onblur="saida()" autofocus> <input type="button" value="inserir" onclick="inserirSimbolo()"> 
-            <p>Por favor utilize os parenteses em proposições grandes ou complexas</p>
-            <label for="prop">Insira uma proposição lógica</label>
+            <p id="warning">Por favor insira os simbolos antes de usa-los e utilize os parenteses em proposições grandes ou complexas</p>
+            <label for="prop" style="font-weight: bold;">Insira uma proposição lógica</label>
             <div id="teclado">
                 <input id="prop" type="text"><input class="inserir" type="button" value="inserir" onclick="inserirProposicao()"><input class="inserir" type="button" value="criar" onclick="criarTabela()"> 
             

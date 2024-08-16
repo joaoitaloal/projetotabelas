@@ -117,30 +117,10 @@ function criarTabela(){
             let prop;
 
             //Chamar a função dependendo da quantidade de simbolos inseridos
-            switch(simblen){
-                case(0): 
-                    window.alert("nenhum simbolo inserido")
-                    break;
-                case(1):
-                    prop = substituir(props[x],`x${0}y${y}`);
-                    break;
-                case(2):
-                    prop = substituir(props[x],`x${0}y${y}`,`x${1}y${y}`);
-                    break;
-                case(3):
-                    prop = substituir(props[x],`x${0}y${y}`,`x${1}y${y}`,`x${2}y${y}`);
-                    break;
-                case(4):
-                    prop = substituir(props[x],`x${0}y${y}`,`x${1}y${y}`,`x${2}y${y}`,`x${3}y${y}`);
-                    break;
-                case(5):
-                    prop = substituir(props[x],`x${0}y${y}`,`x${1}y${y}`,`x${2}y${y}`,`x${3}y${y}`,`x${4}y${y}`);
-                    break;
-                case(6):
-                    prop = substituir(props[x],`x${0}y${y}`,`x${1}y${y}`,`x${2}y${y}`,`x${3}y${y}`,`x${4}y${y}`,`x${5}y${y}`);
-                    break;                            
-            }
+            prop = substituir(props[x], simblen, y);
+
             prop = lerProp(prop);
+
             if(prop == "") error = true;
             escrever(prop,`x${x+simblen}y${y}`);
         }
@@ -183,16 +163,16 @@ function popularTabelasim(){
 
 //(or, +, ∨), (and, ., ∧), (not, ~, ¬), (xor, ⊕, ⊻), (imp, =>, →), (impinv, <=, ←),(xnor, =, ⇔), (Tautologia, T, ⊤), (Absurdo, F, ⊥)
 function substituirSimbolosProp(prop){
-    prop = prop.replace(/or|\./g, "∨")
+    prop = prop.replace(/xor|\⊕/gi, "⊻")
+    .replace(/or|\./gi, "∨")
     .replace(/and|\./gi, "∧")
-    .replace(/not|\~/g, "¬")
-    .replace(/xor|\⊕/g, "⊻")
-    .replace(/imp|\=>/g, "→")
-    .replace(/impinv|\<=/g, "←")
-    .replace(/xnor|\=/g, "⇔")
-    .replace(/tautologia|\T/g, "⊤")
-    .replace(/absurdo|\F/g, "⊥")
-    .replace(/ /g, "");
+    .replace(/not|\~/gi, "¬")
+    .replace(/impinv|implicacaoinversa|\<=/gi, "←")
+    .replace(/imp|implicacao|\=>/gi, "→")
+    .replace(/xnor|\=/gi, "⇔")
+    .replace(/tautologia|\T/gi, "⊤")
+    .replace(/absurdo|\F/gi, "⊥")
+    .replace(/ /gi, "");
     
     return prop
 }
