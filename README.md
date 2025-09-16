@@ -1,4 +1,7 @@
 # Calculadora lógica
+!!!!AVISO!!!!
+O projeto foi movido permanentemente para https://github.com/joaoitaloal/calc-react.
+
  Projeto para calcular lógica booleana e criar tabelas-verdade 
 
 Sobre <br>
